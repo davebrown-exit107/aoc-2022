@@ -4,8 +4,11 @@
 name: Go
 
 on:
-  push:
-    branches: [ "golang" ]
+  pull_request:
+    types: 
+      - "opened"
+    branches: 
+      - "golang"
 
 jobs:
 
