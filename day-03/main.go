@@ -31,6 +31,10 @@ func arrayContains(arrIn []string, contains string) bool {
 	return false
 }
 
+func SumBadges(rucksacks []string) int {
+	return 0
+}
+
 func SumDuplicates(rucksacks []string) int {
 	totals := 0
 	dupes := make([]string, 0)
@@ -79,7 +83,7 @@ func main() {
 	extrasTotal := SumDuplicates(fileLines)
 	fmt.Printf("Sum of extras: %v\n", extrasTotal)
 
-	//newTotalScore := NewScoreRounds(fileLines)
-	//fmt.Printf("The new total score is %v\n", newTotalScore)
+	badgesTotal := SumBadges(fileLines)
+	fmt.Printf("Sum of badges per 3 elves: %v\n", badgesTotal)
 
 }
