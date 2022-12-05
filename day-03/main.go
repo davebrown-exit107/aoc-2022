@@ -32,7 +32,33 @@ func arrayContains(arrIn []string, contains string) bool {
 }
 
 func SumBadges(rucksacks []string) int {
-	return 0
+	curGroup := make([]string, 0)
+	badges := make([]string, 0)
+	for _, sack := range rucksacks {
+		// we're looking for groupings of three sacks to compare against
+		curGroup = append(curGroup, sack)
+		if len(curGroup)%3 == 0 {
+			// we have three, start to scan
+			// prep the groups for comparison
+			dedupeSubSackOne := dedupeArray(strings.Split(curGroup[0], ""))
+			dedupeSubSackTwo := dedupeArray(strings.Split(curGroup[1], ""))
+			dedupeSubSackThree := dedupeArray(strings.Split(curGroup[2], ""))
+			// scan through sack one, checking the other two sacks at the same time
+			for _, item := range dedupeSubSackOne {
+				if arrayContains(dedupeSubSackTwo, item) == true && arrayContains(dedupeSubSackThree, item) == true {
+					// if you're a member of all three, you're a badge
+					badges = append(badges, item)
+				}
+			}
+			curGroup = []string{}
+		}
+	}
+	// sum up the badges
+	totals := 0
+	for _, item := range badges {
+		totals += intValueOf(item)
+	}
+	return totals
 }
 
 func SumDuplicates(rucksacks []string) int {
@@ -66,7 +92,6 @@ func main() {
 	// File opening boilerplate
 	readFile, err := os.Open("input.txt")
 	if err != nil {
-		fmt.Println(err)
 	}
 	defer readFile.Close()
 
