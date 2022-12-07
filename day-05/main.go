@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-// i'm going to get adventerous and try to implement the stacks as linked lists
+// i'm going to get adventurous and try to implement the stacks as linked lists
 type crate struct {
 	contents string
 	next     *crate
