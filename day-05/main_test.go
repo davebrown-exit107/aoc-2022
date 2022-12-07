@@ -14,11 +14,11 @@ func TestCountFullyOverlappingAssignments(t *testing.T) {
 		"move 2 from 2 to 1",
 		"move 1 from 1 to 2"}
 
-	want := 2
-	got := CountFullyOverlappingAssignments(sample_input)
+	want := "CMZ"
+	got := DayFivePartOne(sample_input)
 
 	if want != got {
-		t.Errorf("expected %d, got %d.", want, got)
+		t.Errorf("expected %v, got %v.", want, got)
 	}
 }
 
