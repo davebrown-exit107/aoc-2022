@@ -15,7 +15,8 @@ type Move struct {
 	to   int
 }
 
-// Parse the input file
+// Parse the input file into the stacks and the moves so we can parse those
+// components more easily.
 func parseInput(input []string) (stacks [][]string, moves []Move) {
 	unparsedStacks := make([]string, 0)
 	dividingLine := 0
@@ -104,6 +105,20 @@ func parseMoves(input []string) []Move {
 
 // this will actually manipulate the stacks according to the listed moves
 func craneOperator(stacks [][]string, moves []Move) [][]string {
+	// TODO: I'm starting to think that stacks should be a pointer and modified in place
+	// rather than manipulating it locally and then returning it. Probably a place
+	// for improvement
+	for _, curMove := range moves {
+		for i := curMove.qty; i > 0; i-- {
+			// pop one off of stacks[from] and append to stacks[to]
+			// repeat the previous move for qty
+			// Note: because our stacks are zero-indexed and our moves are one-indexed
+			// we'll need to subtract 1 from each `from` and `to`
+			crate := stacks[curMove.from-1][len(stacks[curMove.from-1])-1]
+			stacks[curMove.from-1] = stacks[curMove.from-1][:len(stacks[curMove.from-1])-1]
+			stacks[curMove.to-1] = append(stacks[curMove.to-1], crate)
+		}
+	}
 	return stacks
 }
 

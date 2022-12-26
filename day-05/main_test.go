@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -26,6 +25,47 @@ func TestDayFivePartOne(t *testing.T) {
 	}
 }
 */
+
+func TestCraneOperator(t *testing.T) {
+	// Generate some test data here
+	move1 := Move{qty: 1, from: 2, to: 1}
+	move2 := Move{qty: 3, from: 1, to: 3}
+	move3 := Move{qty: 2, from: 2, to: 1}
+	move4 := Move{qty: 1, from: 1, to: 2}
+	sampleMoves := make([]Move, 0)
+	sampleMoves = append(sampleMoves, move1)
+	sampleMoves = append(sampleMoves, move2)
+	sampleMoves = append(sampleMoves, move3)
+	sampleMoves = append(sampleMoves, move4)
+
+	var s1, s2, s3 []string
+	var c1, c2, c3, c4, c5, c6 string
+	c1 = "Z"
+	c2 = "N"
+	c3 = "M"
+	c4 = "C"
+	c5 = "D"
+	c6 = "P"
+	s1 = append(s1, c1)
+	s1 = append(s1, c2)
+	s2 = append(s2, c3)
+	s2 = append(s2, c4)
+	s2 = append(s2, c5)
+	s3 = append(s3, c6)
+	sampleStacks := [][]string{s1, s2, s3}
+
+	var ws1, ws2, ws3 []string
+	ws1 = append(ws1, c4)
+	ws2 = append(ws2, c3)
+	ws3 = append(ws3, c6)
+	ws3 = append(ws3, c5)
+	ws3 = append(ws3, c2)
+	ws3 = append(ws3, c1)
+	want := [][]string{ws1, ws2, ws3}
+
+	got := craneOperator(sampleStacks, sampleMoves)
+	assertStacksEqual(t, want, got)
+}
 
 func assertMovesEqual(t testing.TB, want, got []Move) {
 	t.Helper()
@@ -52,7 +92,6 @@ func TestParseMoves(t *testing.T) {
 		"move 2 from 2 to 1",
 		"move 1 from 1 to 2"}
 
-	// I'm not sure how I'll do this other than just generating it manually and copy/pasting here
 	move1 := Move{qty: 1, from: 2, to: 1}
 	move2 := Move{qty: 3, from: 1, to: 3}
 	move3 := Move{qty: 2, from: 2, to: 1}
@@ -110,13 +149,7 @@ func TestParseStacks(t *testing.T) {
 
 	got := parseStacks(sample_input)
 
-	fmt.Println(got, want)
 	assertStacksEqual(t, want, got)
-	/*
-		if reflect.DeepEqual(want, got) {
-			t.Errorf("expected %v, got %v.", want, got)
-		}
-	*/
 }
 
 //func TestCountOverlappingAssignments(t *testing.T) {
