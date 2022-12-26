@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -67,44 +68,56 @@ func TestParseMoves(t *testing.T) {
 	assertMovesEqual(t, want, got)
 }
 
-/*
-func TestParseStacks(t *testing.T) {
-	sample_input := []string{
-		"	   [D]    ",
-		"[N] [C]    ",
-		"[Z] [M] [P]",
-		" 1   2   3 ",
-		"",
-		"move 1 from 2 to 1",
-		"move 3 from 1 to 3",
-		"move 2 from 2 to 1",
-		"move 1 from 1 to 2"}
-
-	// I'm not sure how I'll do this other than just generating it manually and copy/pasting here
-	var stack1, stack2, stack3 stack
-	var crate1, crate2, crate3, crate4, crate5, crate6 crate
-	crate1.contents = "Z"
-	crate2.contents = "N"
-	crate3.contents = "M"
-	crate4.contents = "C"
-	crate5.contents = "D"
-	crate6.contents = "P"
-	stack1.add(&crate1)
-	stack1.add(&crate2)
-	stack2.add(&crate3)
-	stack2.add(&crate4)
-	stack2.add(&crate5)
-	stack3.add(&crate6)
-	want := []stack{stack1, stack2, stack3}
-	got := parseStacks(sample_input)
-	fmt.Println(want, got)
-	fmt.Println(want[0].head.contents)
-
-	if reflect.DeepEqual(want, got) {
-		t.Errorf("expected %v, got %v.", want, got)
+func assertStacksEqual(t *testing.T, want, got [][]string) {
+	t.Helper()
+	if len(want) != len(got) {
+		t.Errorf("different number of stacks: want %d got %d", len(want), len(got))
+	}
+	for i := 0; i < len(want); i++ {
+		if len(want[i]) != len(got[i]) {
+			t.Errorf("different number of crates: want %d got %d", len(want[i]), len(got[i]))
+		}
+		for j := 0; j < len(want[i]); j++ {
+			if want[i][j] != got[i][j] {
+				t.Errorf("incorrect crate contents: want %q got %q", want[i][j], got[i][j])
+			}
+		}
 	}
 }
-*/
+
+func TestParseStacks(t *testing.T) {
+	sample_input := []string{
+		"    [D]    ",
+		"[N] [C]    ",
+		"[Z] [M] [P]",
+		" 1   2   3 "}
+
+	var stack1, stack2, stack3 []string
+	var crate1, crate2, crate3, crate4, crate5, crate6 string
+	crate1 = "Z"
+	crate2 = "N"
+	crate3 = "M"
+	crate4 = "C"
+	crate5 = "D"
+	crate6 = "P"
+	stack1 = append(stack1, crate1)
+	stack1 = append(stack1, crate2)
+	stack2 = append(stack2, crate3)
+	stack2 = append(stack2, crate4)
+	stack2 = append(stack2, crate5)
+	stack3 = append(stack3, crate6)
+	want := [][]string{stack1, stack2, stack3}
+
+	got := parseStacks(sample_input)
+
+	fmt.Println(got, want)
+	assertStacksEqual(t, want, got)
+	/*
+		if reflect.DeepEqual(want, got) {
+			t.Errorf("expected %v, got %v.", want, got)
+		}
+	*/
+}
 
 //func TestCountOverlappingAssignments(t *testing.T) {
 //	sample_input := []string{
