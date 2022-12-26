@@ -44,11 +44,12 @@ func parseInput(input []string) (stacks [][]string, moves []Move) {
 	return stacks, moves
 }
 
+// Parse out the stacks and return them as a two-dimensional array The general strategy
+// is to parse the input backwards (bottom to top) so that we can easily identify how
+// many stacks we have. Create a top level array for each one and then proceed to find
+// crates and append them to the correct stack..
 // Example input: [          [D]     [N] [C]     [Z] [M] [P]  1   2   3 ]
 func parseStacks(input []string) (stacks [][]string) {
-	// this will parse out the stacks from the input into the stacks struct
-	// then traverse them backwards, adding a crate to the stack for each progressive line
-	// that'll create the stacks
 	for i := len(input) - 1; i >= 0; i-- {
 		if i == len(input)-1 {
 			// header row
@@ -77,42 +78,6 @@ func parseStacks(input []string) (stacks [][]string) {
 	}
 	return
 }
-
-/*
-	stacks := make([][]string, 0)
-	for row := len(input) - 1; row > 0; row-- {
-		if row == len(input)-1 {
-			//fmt.Println("First row")
-			// we're in the bottom line (where the stack numbers are)
-			// find out how many stacks we have and create a new stack for each one
-			for _, stackNum := range strings.Split(input[row], " ") {
-				if stackNum != "" {
-					//fmt.Println("found stack")
-					stacks = append(stacks, make([]string, 0))
-				}
-			}
-		} else {
-			// instead of splitting on spaces, I'm going to count columns and
-			// split on mod 4 == 0
-			for col, crateVal := range strings.Split(input[row], "") {
-				//fmt.Printf("row %d of %d, col %d of %d, current crateval: %q\n", row, len(input), col, len(strings.Split(input[row], "")), crateVal)
-				if (col+1)%4 == 0 {
-					//fmt.Println("Something")
-					//fmt.Println(crateVal)
-					//fmt.Println(row, col, input[col-2])
-					stacks[row] = append(stacks[row], crateVal)
-				}
-			}
-		}
-	}
-	//fmt.Println(len(stacks))
-	for _, curStack := range stacks {
-		//curStack.printAll()
-		_ = curStack
-	}
-	return stacks
-}
-*/
 
 // parseMoves: Parse out the components of the move to make craneOperator simpler to implement
 func parseMoves(input []string) []Move {
