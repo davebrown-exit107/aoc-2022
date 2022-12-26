@@ -53,12 +53,12 @@ func TestCraneOperator9001(t *testing.T) {
 	sampleStacks := [][]string{s1, s2, s3}
 
 	var ws1, ws2, ws3 []string
-	ws1 = append(ws1, c4)
-	ws2 = append(ws2, c3)
+	ws1 = append(ws1, c3)
+	ws2 = append(ws2, c4)
 	ws3 = append(ws3, c6)
-	ws3 = append(ws3, c5)
-	ws3 = append(ws3, c2)
 	ws3 = append(ws3, c1)
+	ws3 = append(ws3, c2)
+	ws3 = append(ws3, c5)
 	want := [][]string{ws1, ws2, ws3}
 
 	got := craneOperator9001(sampleStacks, sampleMoves)

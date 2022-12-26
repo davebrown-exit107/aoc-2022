@@ -109,15 +109,12 @@ func craneOperator9001(stacks [][]string, moves []Move) [][]string {
 	// rather than manipulating it locally and then returning it. Probably a place
 	// for improvement
 	for _, curMove := range moves {
-		for i := curMove.qty; i > 0; i-- {
-			// pop one off of stacks[from] and append to stacks[to]
-			// repeat the previous move for qty
-			// Note: because our stacks are zero-indexed and our moves are one-indexed
-			// we'll need to subtract 1 from each `from` and `to`
-			crate := stacks[curMove.from-1][len(stacks[curMove.from-1])-1]
-			stacks[curMove.from-1] = stacks[curMove.from-1][:len(stacks[curMove.from-1])-1]
-			stacks[curMove.to-1] = append(stacks[curMove.to-1], crate)
-		}
+		// pop qty off of stacks[from] and append to stacks[to]
+		// Note: because our stacks are zero-indexed and our moves are one-indexed
+		// we'll need to subtract 1 from each `from` and `to`
+		crate := stacks[curMove.from-1][len(stacks[curMove.from-1])-curMove.qty:]
+		stacks[curMove.from-1] = stacks[curMove.from-1][:len(stacks[curMove.from-1])-curMove.qty]
+		stacks[curMove.to-1] = append(stacks[curMove.to-1], crate...)
 	}
 	return stacks
 }
@@ -168,7 +165,7 @@ func DayFivePartTwo(input []string) string {
 	var stacks [][]string
 	var moves []Move
 	stacks, moves = parseInput(input)
-	finalStacks := craneOperator9000(stacks, moves)
+	finalStacks := craneOperator9001(stacks, moves)
 	tops := checkTops(finalStacks)
 	return tops
 }
