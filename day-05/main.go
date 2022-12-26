@@ -104,7 +104,7 @@ func parseMoves(input []string) []Move {
 }
 
 // this will actually manipulate the stacks according to the listed moves
-func craneOperator(stacks [][]string, moves []Move) [][]string {
+func craneOperator9000(stacks [][]string, moves []Move) [][]string {
 	// TODO: I'm starting to think that stacks should be a pointer and modified in place
 	// rather than manipulating it locally and then returning it. Probably a place
 	// for improvement
@@ -139,7 +139,7 @@ func DayFivePartOne(input []string) string {
 	var stacks [][]string
 	var moves []Move
 	stacks, moves = parseInput(input)
-	finalStacks := craneOperator(stacks, moves)
+	finalStacks := craneOperator9000(stacks, moves)
 	tops := checkTops(finalStacks)
 	return tops
 }

@@ -24,7 +24,7 @@ func TestDayFivePartOne(t *testing.T) {
 	}
 }
 
-func TestCraneOperator(t *testing.T) {
+func TestCraneOperator9000(t *testing.T) {
 	// Generate some test data here
 	move1 := Move{qty: 1, from: 2, to: 1}
 	move2 := Move{qty: 3, from: 1, to: 3}
@@ -61,7 +61,7 @@ func TestCraneOperator(t *testing.T) {
 	ws3 = append(ws3, c1)
 	want := [][]string{ws1, ws2, ws3}
 
-	got := craneOperator(sampleStacks, sampleMoves)
+	got := craneOperator9000(sampleStacks, sampleMoves)
 	assertStacksEqual(t, want, got)
 }
 
