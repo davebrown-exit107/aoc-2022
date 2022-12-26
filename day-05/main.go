@@ -150,11 +150,11 @@ func checkTops(stacks [][]string) string {
 	return strings.Join(tops, "")
 }
 
-// the main function the first part of the challenge goes through
-// first we parse the input file and separate the stacks from the moves
-// then we step through the moves and apply them to the stacks
-// then we check the tops and return them
+// Solver for Day 05 Pt 01
 func DayFivePartOne(input []string) string {
+	// first we parse the input file and separate the stacks from the moves
+	// then we step through the moves and apply them to the stacks
+	// then we check the tops and return them
 	var stacks [][]string
 	var moves []Move
 	stacks, moves = parseInput(input)
@@ -163,6 +163,7 @@ func DayFivePartOne(input []string) string {
 	return tops
 }
 
+// Solver for Day 05 Pt 02
 func DayFivePartTwo(input []string) string {
 	var stacks [][]string
 	var moves []Move
