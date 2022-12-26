@@ -104,6 +104,25 @@ func parseMoves(input []string) []Move {
 }
 
 // this will actually manipulate the stacks according to the listed moves
+func craneOperator9001(stacks [][]string, moves []Move) [][]string {
+	// TODO: I'm starting to think that stacks should be a pointer and modified in place
+	// rather than manipulating it locally and then returning it. Probably a place
+	// for improvement
+	for _, curMove := range moves {
+		for i := curMove.qty; i > 0; i-- {
+			// pop one off of stacks[from] and append to stacks[to]
+			// repeat the previous move for qty
+			// Note: because our stacks are zero-indexed and our moves are one-indexed
+			// we'll need to subtract 1 from each `from` and `to`
+			crate := stacks[curMove.from-1][len(stacks[curMove.from-1])-1]
+			stacks[curMove.from-1] = stacks[curMove.from-1][:len(stacks[curMove.from-1])-1]
+			stacks[curMove.to-1] = append(stacks[curMove.to-1], crate)
+		}
+	}
+	return stacks
+}
+
+// this will actually manipulate the stacks according to the listed moves
 func craneOperator9000(stacks [][]string, moves []Move) [][]string {
 	// TODO: I'm starting to think that stacks should be a pointer and modified in place
 	// rather than manipulating it locally and then returning it. Probably a place
@@ -144,6 +163,15 @@ func DayFivePartOne(input []string) string {
 	return tops
 }
 
+func DayFivePartTwo(input []string) string {
+	var stacks [][]string
+	var moves []Move
+	stacks, moves = parseInput(input)
+	finalStacks := craneOperator9000(stacks, moves)
+	tops := checkTops(finalStacks)
+	return tops
+}
+
 func main() {
 	// File opening boilerplate
 	readFile, err := os.Open("input.txt")
@@ -163,9 +191,9 @@ func main() {
 	// AoC work starts here
 	stackTops := DayFivePartOne(fileLines)
 	fmt.Printf("Final tops of stacks: %v\n", stackTops)
-	//
-	//	overlaps := CountOverlappingAssignments(fileLines)
-	//	fmt.Printf("Count of overlaps: %v\n", overlaps)
+
+	newStackTops := DayFivePartTwo(fileLines)
+	fmt.Printf("New tops of stacks: %v\n", newStackTops)
 }
 
 /*********************************************************
