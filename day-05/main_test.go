@@ -4,7 +4,6 @@ import (
 	"testing"
 )
 
-/*
 func TestDayFivePartOne(t *testing.T) {
 	sample_input := []string{
 		"	   [D]    ",
@@ -24,7 +23,6 @@ func TestDayFivePartOne(t *testing.T) {
 		t.Errorf("expected %v, got %v.", want, got)
 	}
 }
-*/
 
 func TestCraneOperator(t *testing.T) {
 	// Generate some test data here
@@ -152,7 +150,7 @@ func TestParseStacks(t *testing.T) {
 	assertStacksEqual(t, want, got)
 }
 
-//func TestCountOverlappingAssignments(t *testing.T) {
+//func TestDayFivePartTwo(t *testing.T) {
 //	sample_input := []string{
 //		"2-4,6-8",
 //		"2-3,4-5",
