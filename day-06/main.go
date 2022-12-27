@@ -8,6 +8,17 @@ import (
 
 // Solver for Day 06 Pt 01
 func DaySixPartOne(input string) (numChars int) {
+	for i := 0; i < len(input)-4; i++ {
+		if string(input[i]) != string(input[i+1]) &&
+			string(input[i]) != string(input[i+2]) &&
+			string(input[i]) != string(input[i+3]) &&
+			string(input[i+1]) != string(input[i+2]) &&
+			string(input[i+1]) != string(input[i+3]) &&
+			string(input[i+2]) != string(input[i+3]) {
+			numChars = i + 4
+			break
+		}
+	}
 	return
 }
 
